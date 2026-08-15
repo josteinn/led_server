@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" id="txtName" placeholder="Name">
+    <input type="color" id="txtColor" placeholder="Color">
+    <button id="btnSend">Send to server</button>
+
+
+    <script>
+
+        const URL_BASE = "http://10.0.0.7:3000";
+        const PATH = "/setname";        
+
+        //----------------------------------------------------
+        document.getElementById("btnSend").addEventListener("click", function(evt) {
+
+            let qName = document.getElementById("txtName").value;
+            let qColor = document.getElementById("txtColor").value.slice(1);
+
+            let url = URL_BASE + PATH + "?name=" + qName + "&color=" + qColor + "&key=MM206";
+
+            sendRequest(url);
+
+            console.log(qColor)
+        })
+
+        //----------------------------------------------------
+        async function sendRequest(url) {
+
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log(data);
+
+        }
+
+    </script>
+    
+</body>
+</html>
